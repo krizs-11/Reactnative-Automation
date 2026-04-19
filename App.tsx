@@ -18,7 +18,6 @@ function App() {
   return (
     <SafeAreaProvider>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      {/* <AppContent /> */}
       <View style={{flex:1,backgroundColor:'red',justifyContent:'center',alignItems:'center'}}>
         <Text style={{fontSize:18,fontWeight:400}}>Hello Automation Rn</Text>
       </View>
@@ -26,23 +25,8 @@ function App() {
   );
 }
 
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
 
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
-    </View>
-  );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+
 
 export default App;
