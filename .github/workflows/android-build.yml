@@ -1,10 +1,69 @@
-name: Android Dev Build
+# name: Android Dev Build
 
-# 1. This tells GitHub to run ONLY when you push to 'dev-Automation-rn'
+# # 1. This tells GitHub to run ONLY when you push to 'dev-Automation-rn'
+# on:
+#   push:
+#     branches:
+#       - dev-Automation-rn
+
+# jobs:
+#   build_apk:
+#     name: Build Android APK
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       # Grabs your code from the repository
+#       - name: Checkout Code
+#         uses: actions/checkout@v4
+
+#       # Sets up the environment
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: '20'
+
+#       # Installs your project packages
+#       - name: Install npm dependencies
+#         run: npm install
+
+#       # Runs your linter to check for code errors before building
+#       - name: Run Code Checks
+#         run: npm run lint
+
+#       # Sets up Java (Required for React Native Android builds)
+#       - name: Setup Java
+#         uses: actions/setup-java@v4
+#         with:
+#           distribution: 'zulu'
+#           java-version: '17'
+
+#       # Gives GitHub permission to run the Android build tool
+#       - name: Make Gradlew Executable
+#         run: cd android && chmod +x ./gradlew
+
+#       # Actually builds the APK
+#       - name: Build Debug APK
+#         run: cd android && ./gradlew assembleDebug
+
+#       # Saves the finished APK so you can download it
+#       - name: Upload APK File
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: my-app-apk
+#           path: android/app/build/outputs/apk/debug/app-debug.apk/
+
+# above is for automatc build 
+
+name: Android QA Build
+
+# 1. This replaces the automatic 'push' trigger with a manual button on GitHub
 on:
-  push:
-    branches:
-      - dev-Automation-rn
+  workflow_dispatch:
+    inputs:
+      build_notes:
+        description: 'What is in this build? (e.g., Fixed login bug)'
+        required: false
+        default: 'Routine QA Build'
 
 jobs:
   build_apk:
@@ -49,5 +108,6 @@ jobs:
       - name: Upload APK File
         uses: actions/upload-artifact@v4
         with:
-          name: my-app-apk
+          # This creates a unique name for every build so you don't lose old ones
+          name: QA-Build-${{ github.ref_name }}-v${{ github.run_number }}
           path: android/app/build/outputs/apk/debug/app-debug.apk
