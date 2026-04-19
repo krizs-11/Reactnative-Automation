@@ -20,7 +20,7 @@ function App() {
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       {/* <AppContent /> */}
       <View style={{flex:1,backgroundColor:'red',justifyContent:'center',alignItems:'center'}}>
-        <Text style={{fontSize:18,fontWeight:'400'}}>Hello Automation Rn</Text>
+        <Text style={{fontSize:18,fontWeight:400}}>Hello Automation Rn</Text>
       </View>
     </SafeAreaProvider>
   );
